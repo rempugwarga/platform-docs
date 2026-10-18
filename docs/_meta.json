@@ -1,0 +1,8 @@
+[
+  "index",
+  { "type": "dir", "name": "onboarding", "label": "Mulai (Onboarding)" },
+  { "type": "dir", "name": "identity", "label": "Identity & OIDC" },
+  { "type": "dir", "name": "design-system", "label": "Design System" },
+  { "type": "dir", "name": "security", "label": "Keamanan & Akses" },
+  { "type": "dir", "name": "services", "label": "Katalog Layanan" }
+]

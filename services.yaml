@@ -1,0 +1,78 @@
+# Katalog layanan rempugwarga — sumber kebenaran untuk "platform menyediakan layanan terdokumentasi".
+# Divalidasi tests/services-catalog.test.ts (schema, link kontrak, kepemilikan)
+# dan konsistensinya dengan platform-ci/repos.yaml (bun run check:consistency).
+# Dirender di docs/services/catalog.md.
+
+services:
+  - name: identity-platform
+    display_name: Identity & OIDC (Keycloak)
+    type: identity
+    owner: identity-platform
+    repository: https://github.com/rempugwarga/identity-platform
+    docs:
+      - /identity/oidc-integration
+      - /identity/environments
+      - /identity/client-registration
+      - /identity/token-policies
+    interaction: x-as-a-service
+    contact: "#identity-platform"
+    interface: "OIDC discovery per environment; registrasi client via PR ke clients/"
+    request_path: "Self-service: `bun run new-client …` → PR ke identity-platform/clients/ (dibuat otomatis oleh generator, lolos kebijakan sebelum CI)"
+    sla: "Review client ≤ 2 hari kerja; insiden autentikasi ≤ 4 jam"
+    versioning: "Realm & kebijakan sebagai kode (token-policy.json berversi semver + effectiveDate); perubahan diuji di realm ephemeral sebelum apply"
+
+  - name: design-system
+    display_name: Design System (React)
+    type: ui
+    owner: design-system-team
+    repository: https://github.com/rempugwarga/design-system
+    docs:
+      - /design-system/consumption
+    interaction: x-as-a-service
+    contact: "#platform-design-system"
+    interface: "Paket npm @rempugwarga/design-system (semver) + MF remote designSystem"
+    request_path: "`npm install @rempugwarga/design-system` atau konsumsi MF remote; upgrade via PR Dependabot otomatis"
+    sla: "Perbaikan bug komponen ≤ 5 hari kerja; office hours mingguan"
+    versioning: "Semantic Versioning + Changesets; changeset wajib ditegakkan CI; breaking hanya pada major"
+
+  - name: platform-ci
+    display_name: CI/CD & Branch Protection
+    type: ci-cd
+    owner: platform-engineering
+    repository: https://github.com/rempugwarga/platform-ci
+    docs:
+      - /services/catalog
+    interaction: x-as-a-service
+    contact: "#platform-engineering"
+    interface: "Workflow reusable (node/terraform/security) + settings-as-code (repos.yaml)"
+    request_path: "Salin pemanggilan workflow reusable ke `.github/workflows/` repo Anda (contoh di docs/REUSABLE-WORKFLOWS.md); repo baru via PR ke repos.yaml"
+    sla: "Perubahan standar ≤ 3 hari kerja; insiden pipeline ≤ 1 hari kerja"
+    versioning: "Kontrak input workflow dijaga kompatibel; perubahan breaking diumumkan"
+
+  - name: app-template
+    display_name: Golden Path Aplikasi
+    type: template
+    owner: platform-engineering
+    repository: https://github.com/rempugwarga/app-template
+    docs:
+      - /onboarding/
+    interaction: x-as-a-service
+    contact: "#platform-engineering"
+    interface: "Template repo (Rsbuild + React + OIDC + design system + CI)"
+    request_path: "GitHub: \"Use this template\" → ikuti checklist onboarding di README repo hasil"
+    sla: "Template selalu hijau di CI; pembaruan kuartalan"
+    versioning: "Perubahan template mengikuti changelog sendiri"
+
+  - name: platform-docs
+    display_name: Portal Dokumentasi Platform
+    type: docs
+    owner: platform-engineering
+    repository: https://github.com/rempugwarga/platform-docs
+    docs:
+      - /
+    interaction: x-as-a-service
+    contact: "#platform-engineering"
+    interface: "Situs statis (Rspress) berisi kontrak integrasi & katalog layanan"
+    request_path: "Baca /onboarding/; usulan perubahan kontrak via PR ke platform-docs (review code owner tim pemilik kontrak)"
+    sla: "Dokumen diperbarui bersama setiap perubahan kontrak"
+    versioning: "Perubahan kontrak ditandai tanggal berlaku di halaman terkait"

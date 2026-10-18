@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+
+# Build output Rspress
+doc_build
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Tooling
+coverage
+.DS_Store
+*.log

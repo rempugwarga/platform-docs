@@ -1,0 +1,26 @@
+{
+  "name": "@rempugwarga/platform-docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Portal dokumentasi & kontrak integrasi rempugwarga",
+  "type": "module",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview",
+    "typecheck": "tsc --noEmit",
+    "test": "rstest run",
+    "test:watch": "rstest --watch"
+  },
+  "packageManager": "bun@1.4.2",
+  "devDependencies": {
+    "@rspress/core": "^2.0.23",
+    "@rstest/core": "^0.12.3",
+    "@types/node": "^26.6.5",
+    "ajv": "^8.20.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2",
+    "yaml": "^2.9.1"
+  }
+}

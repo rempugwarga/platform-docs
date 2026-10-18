@@ -1,0 +1,10 @@
+# Ownership: Platform Engineering (@rempugwarga/platform-engineering)
+# Portal ini adalah kontrak integrasi — konten kontrak (identity, design
+# system, keamanan) direview bersama tim pemilik layanan terkait.
+
+*                   @rempugwarga/platform-engineering
+
+/docs/identity/     @rempugwarga/platform-engineering @rempugwarga/identity-platform
+/docs/design-system/ @rempugwarga/platform-engineering @rempugwarga/design-system-team
+/docs/security/     @rempugwarga/platform-engineering @rempugwarga/identity-platform
+/services.yaml      @rempugwarga/platform-engineering

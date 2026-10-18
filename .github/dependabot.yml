@@ -1,0 +1,34 @@
+# Perubahan dependensi npm dan GitHub Actions diusulkan otomatis.
+# Reviewer: Platform Engineering + code owner kontrak (lihat .github/CODEOWNERS).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    groups:
+      rstack:
+        patterns:
+          - '@rspress/*'
+          - '@rstest/*'
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+      validation:
+        patterns:
+          - 'ajv'
+          - 'yaml'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+      - ci

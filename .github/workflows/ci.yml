@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Build & Test
+    uses: rempugwarga/platform-ci/.github/workflows/reusable-node-ci.yml@main
+
+  security:
+    name: Security Scan
+    uses: rempugwarga/platform-ci/.github/workflows/reusable-security-scan.yml@main
+
+  deploy:
+    name: Deploy Portal (GitHub Pages)
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [ci]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - name: Build (base path untuk Pages)
+        env:
+          DOCS_BASE: /${{ github.event.repository.name }}/
+        run: bun run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: doc_build
+      - id: deployment
+        uses: actions/deploy-pages@v4
