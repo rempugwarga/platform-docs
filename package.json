@@ -14,8 +14,8 @@
   },
   "packageManager": "bun@1.4.2",
   "devDependencies": {
-    "@rspress/core": "^2.0.23",
-    "@rstest/core": "^0.12.3",
+    "@rspress/core": "^2.1.0",
+    "@rstest/core": "^0.12.6",
     "@types/node": "^26.6.5",
     "ajv": "^8.20.0",
     "react": "^19.3.1",
